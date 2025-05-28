@@ -1,4 +1,4 @@
-import { type Movie } from "../types/movies.ts";
+import { type Movie } from "../types/movie.ts";
 
 import axios from "axios";
 

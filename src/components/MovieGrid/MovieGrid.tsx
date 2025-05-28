@@ -1,5 +1,5 @@
 import css from "./MovieGrid.module.css";
-import { type Movie } from "../../types/movies.ts";
+import { type Movie } from "../../types/movie.ts";
 
 interface MovieGridProps {
   onSelect: (movie: Movie) => void;
