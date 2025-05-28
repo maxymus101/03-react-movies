@@ -13,7 +13,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState<Movie>();
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const notifyError = () =>
     toast.error("No movies found for your request.", {
       style: { background: "rgba(125, 183, 255, 0.8)" },
