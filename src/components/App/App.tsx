@@ -41,7 +41,6 @@ export default function App() {
     } catch {
       setError(true);
       setMovie([]);
-      console.log("CATch");
     } finally {
       setIsLoading(false);
     }

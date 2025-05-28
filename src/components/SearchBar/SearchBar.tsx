@@ -13,7 +13,6 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
   const handleSubmit = (formData: FormData) => {
     if (formData.get("query") === "") {
       notifyError();
-      console.log(`i triggered ONCE`);
     }
     const query = formData.get("query") as string;
     onSubmit(query);
