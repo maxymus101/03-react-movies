@@ -6,15 +6,15 @@ export interface GetMovieRes {
   results: Movie[];
 }
 export const axiosConfig = {
-  url: "https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1",
+  url: "https://api.themoviedb.org/3/search/movie",
   headers: {
     accept: "application/json",
     Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
   },
 };
-export const fetchMovies = async (newQuery: string) => {
+export const fetchMovies = async (newQuery: string): Promise<Movie[]> => {
   const res = await axios.get<GetMovieRes>(
-    `https://api.themoviedb.org/3/search/movie?query=${newQuery}`,
+    `${axiosConfig.url}?query=${newQuery}`,
     axiosConfig
   );
   return res.data.results;

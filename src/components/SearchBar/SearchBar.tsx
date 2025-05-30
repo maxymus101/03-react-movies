@@ -6,17 +6,18 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ onSubmit }: SearchBarProps) {
-  const notifyError = () =>
-    toast.error("Please enter your search query.", {
-      style: { background: "rgba(244, 129, 130, 0.8)" },
-    });
   const handleSubmit = (formData: FormData) => {
     if (formData.get("query") === "") {
       notifyError();
+      return;
     }
     const query = formData.get("query") as string;
     onSubmit(query);
   };
+  const notifyError = () =>
+    toast.error("Please enter your search query.", {
+      style: { background: "rgba(244, 129, 130, 0.8)" },
+    });
   return (
     <header className={css.header}>
       <div className={css.container}>

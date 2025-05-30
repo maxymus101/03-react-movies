@@ -9,10 +9,9 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage.tsx";
 import MovieModal from "../MovieModal/MovieModal.tsx";
 
 export default function App() {
-  const [movie, setMovie] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const notifyError = () =>
     toast.error("No movies found for your request.", {
@@ -20,12 +19,13 @@ export default function App() {
       icon: "ℹ️",
     });
 
-  const openModal = (movie: Movie) => {
-    setSelectedMovie(movie);
-    setIsModalOpen(true);
+  const openModal = (movies: Movie) => {
+    setSelectedMovie(movies);
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setSelectedMovie(null);
+  };
 
   const handleSearch = async (newQuery: string) => {
     try {
@@ -36,11 +36,10 @@ export default function App() {
         notifyError();
       }
 
-      setMovie(newMovies);
-      setIsLoading(false);
+      setMovies(newMovies);
     } catch {
       setError(true);
-      setMovie([]);
+      setMovies([]);
     } finally {
       setIsLoading(false);
     }
@@ -51,8 +50,10 @@ export default function App() {
       <Toaster />
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-      {movie.length > 0 && <MovieGrid onSelect={openModal} movies={movie} />}
-      {isModalOpen && <MovieModal onClose={closeModal} movie={selectedMovie} />}
+      {movies.length > 0 && <MovieGrid onSelect={openModal} movies={movies} />}
+      {selectedMovie !== null && (
+        <MovieModal onClose={closeModal} movie={selectedMovie} />
+      )}
     </>
   );
 }
